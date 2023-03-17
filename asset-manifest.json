@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/Xrpl-Eventify/tree/master/Frontend/static/css/main.3243850a.css",
-    "main.js": "/Xrpl-Eventify/tree/master/Frontend/static/js/main.200c6673.js",
-    "static/js/787.439c9883.chunk.js": "/Xrpl-Eventify/tree/master/Frontend/static/js/787.439c9883.chunk.js",
-    "static/media/AntiqueCamera.glb": "/Xrpl-Eventify/tree/master/Frontend/static/media/AntiqueCamera.b6982ec7c34c448a74c7.glb",
-    "static/media/BarramundiFish.glb": "/Xrpl-Eventify/tree/master/Frontend/static/media/BarramundiFish.cfc464a969cdd8a29f61.glb",
-    "static/media/Avocado.glb": "/Xrpl-Eventify/tree/master/Frontend/static/media/Avocado.219d1b0f1f2f448d0f1c.glb",
-    "static/media/splash.png": "/Xrpl-Eventify/tree/master/Frontend/static/media/splash.bf9b49e5da6a5c8cc4f1.png",
-    "index.html": "/Xrpl-Eventify/tree/master/Frontend/index.html",
-    "main.3243850a.css.map": "/Xrpl-Eventify/tree/master/Frontend/static/css/main.3243850a.css.map",
-    "main.200c6673.js.map": "/Xrpl-Eventify/tree/master/Frontend/static/js/main.200c6673.js.map",
-    "787.439c9883.chunk.js.map": "/Xrpl-Eventify/tree/master/Frontend/static/js/787.439c9883.chunk.js.map"
+    "main.css": "/Xrpl-Eventify/static/css/main.a3f44155.css",
+    "main.js": "/Xrpl-Eventify/static/js/main.9cdaed77.js",
+    "static/js/787.439c9883.chunk.js": "/Xrpl-Eventify/static/js/787.439c9883.chunk.js",
+    "static/media/AntiqueCamera.glb": "/Xrpl-Eventify/static/media/AntiqueCamera.b6982ec7c34c448a74c7.glb",
+    "static/media/BarramundiFish.glb": "/Xrpl-Eventify/static/media/BarramundiFish.cfc464a969cdd8a29f61.glb",
+    "static/media/Avocado.glb": "/Xrpl-Eventify/static/media/Avocado.219d1b0f1f2f448d0f1c.glb",
+    "static/media/splash.png": "/Xrpl-Eventify/static/media/splash.bf9b49e5da6a5c8cc4f1.png",
+    "index.html": "/Xrpl-Eventify/index.html",
+    "main.a3f44155.css.map": "/Xrpl-Eventify/static/css/main.a3f44155.css.map",
+    "main.9cdaed77.js.map": "/Xrpl-Eventify/static/js/main.9cdaed77.js.map",
+    "787.439c9883.chunk.js.map": "/Xrpl-Eventify/static/js/787.439c9883.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3243850a.css",
-    "static/js/main.200c6673.js"
+    "static/css/main.a3f44155.css",
+    "static/js/main.9cdaed77.js"
   ]
 }
