@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/Xrpl-Eventify/static/css/main.a3f44155.css",
-    "main.js": "/Xrpl-Eventify/static/js/main.9cdaed77.js",
-    "static/js/787.439c9883.chunk.js": "/Xrpl-Eventify/static/js/787.439c9883.chunk.js",
-    "static/media/AntiqueCamera.glb": "/Xrpl-Eventify/static/media/AntiqueCamera.b6982ec7c34c448a74c7.glb",
-    "static/media/BarramundiFish.glb": "/Xrpl-Eventify/static/media/BarramundiFish.cfc464a969cdd8a29f61.glb",
-    "static/media/Avocado.glb": "/Xrpl-Eventify/static/media/Avocado.219d1b0f1f2f448d0f1c.glb",
-    "static/media/splash.png": "/Xrpl-Eventify/static/media/splash.bf9b49e5da6a5c8cc4f1.png",
-    "index.html": "/Xrpl-Eventify/index.html",
-    "main.a3f44155.css.map": "/Xrpl-Eventify/static/css/main.a3f44155.css.map",
-    "main.9cdaed77.js.map": "/Xrpl-Eventify/static/js/main.9cdaed77.js.map",
-    "787.439c9883.chunk.js.map": "/Xrpl-Eventify/static/js/787.439c9883.chunk.js.map"
+    "main.css": "/Xrpl-Eventify/Frontend/static/css/main.8aa1b6bb.css",
+    "main.js": "/Xrpl-Eventify/Frontend/static/js/main.82035d19.js",
+    "static/js/787.439c9883.chunk.js": "/Xrpl-Eventify/Frontend/static/js/787.439c9883.chunk.js",
+    "static/media/AntiqueCamera.glb": "/Xrpl-Eventify/Frontend/static/media/AntiqueCamera.b6982ec7c34c448a74c7.glb",
+    "static/media/BarramundiFish.glb": "/Xrpl-Eventify/Frontend/static/media/BarramundiFish.cfc464a969cdd8a29f61.glb",
+    "static/media/Avocado.glb": "/Xrpl-Eventify/Frontend/static/media/Avocado.219d1b0f1f2f448d0f1c.glb",
+    "static/media/splash.png": "/Xrpl-Eventify/Frontend/static/media/splash.bf9b49e5da6a5c8cc4f1.png",
+    "index.html": "/Xrpl-Eventify/Frontend/index.html",
+    "main.8aa1b6bb.css.map": "/Xrpl-Eventify/Frontend/static/css/main.8aa1b6bb.css.map",
+    "main.82035d19.js.map": "/Xrpl-Eventify/Frontend/static/js/main.82035d19.js.map",
+    "787.439c9883.chunk.js.map": "/Xrpl-Eventify/Frontend/static/js/787.439c9883.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a3f44155.css",
-    "static/js/main.9cdaed77.js"
+    "static/css/main.8aa1b6bb.css",
+    "static/js/main.82035d19.js"
   ]
 }
