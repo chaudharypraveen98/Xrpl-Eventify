@@ -1,0 +1,32 @@
+{
+  "name": "eventify-backend",
+  "version": "1.0.0",
+  "description": "Customizable event pages, Ticketing and Registration services, Payment processing, analytics and Reporting, and more",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm start\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "Praveen Chaudhary",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.3.4",
+    "body-parser": "^1.20.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "form-data": "^4.0.0",
+    "formidable": "^2.1.1",
+    "mongoose": "^5.11.5",
+    "node-fetch": "^3.3.0",
+    "xrpl": "^2.5.0-beta.1",
+    "xumm-sdk": "^1.7.6"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  }
+}

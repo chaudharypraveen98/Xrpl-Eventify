@@ -1,0 +1,73 @@
+.modalBurnBackground{
+    background-color: white;
+    border-radius: 12px;
+    position:  fixed!important;
+    box-shadow: rgba(0,0,0,0.35) 0px 5px 15px;
+    display: flex;
+    height: auto!important;
+    width: 40%!important;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modalBurnContainer{
+    display: flex;
+    flex-direction: column;
+    padding: 25px
+
+}
+
+.modalBurnContainer .title {
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.titleCloseBtn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.titleCloseBtn button { 
+    background-color: transparent;
+    border: none; 
+    font-size: 25px;
+    cursor: pointer;
+    
+}
+
+.modalBurnContainer .body{
+    flex: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+    text-align: center;
+}
+
+
+.modalBurnContainer .footer { 
+
+    flex: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.modalBurnContainer .footer button { 
+    width: 150px;
+    height: 45px;
+    margin: 10px;
+    border: none;
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#cancelBtn { 
+    background-color: crimson;
+}
