@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Xrpl-Eventify/static/css/main.a3f44155.css",
-    "main.js": "/Xrpl-Eventify/static/js/main.92315e8c.js",
+    "main.js": "/Xrpl-Eventify/static/js/main.726f8c91.js",
     "static/js/787.439c9883.chunk.js": "/Xrpl-Eventify/static/js/787.439c9883.chunk.js",
     "static/media/AntiqueCamera.glb": "/Xrpl-Eventify/static/media/AntiqueCamera.b6982ec7c34c448a74c7.glb",
     "static/media/BarramundiFish.glb": "/Xrpl-Eventify/static/media/BarramundiFish.cfc464a969cdd8a29f61.glb",
@@ -9,11 +9,11 @@
     "static/media/splash.png": "/Xrpl-Eventify/static/media/splash.bf9b49e5da6a5c8cc4f1.png",
     "index.html": "/Xrpl-Eventify/index.html",
     "main.a3f44155.css.map": "/Xrpl-Eventify/static/css/main.a3f44155.css.map",
-    "main.92315e8c.js.map": "/Xrpl-Eventify/static/js/main.92315e8c.js.map",
+    "main.726f8c91.js.map": "/Xrpl-Eventify/static/js/main.726f8c91.js.map",
     "787.439c9883.chunk.js.map": "/Xrpl-Eventify/static/js/787.439c9883.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a3f44155.css",
-    "static/js/main.92315e8c.js"
+    "static/js/main.726f8c91.js"
   ]
 }
