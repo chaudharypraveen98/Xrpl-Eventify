@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import api from "../services";
 
 class QrModal extends Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class QrModal extends Component {
 
                 const headers = { body: JSON.stringify(body) };
 
-                let response = await axios
+                let response = await api
                     .get("/api/getPayloadInfo", { headers })
                     .then((data) => {
                         if (data.data.meta.signed) {

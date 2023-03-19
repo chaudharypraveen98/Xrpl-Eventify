@@ -1,15 +1,20 @@
 import React ,{ useState, useEffect }from "react";
 import { toast } from "react-toastify";
+import { activateSearch } from "../services/nftServices";
 
 import "./AddressModal.css";
 import TextInput from "./base/TextInput";
 
 function AddressModal({ closeModal }) {
-    const [walletAddress, setWalletAddress] = useState("");
-    const saveAddress = () => {
+    const wallet = JSON.parse(localStorage.getItem("wallet"));
+    const [walletAddress, setWalletAddress] = useState(wallet);
+    const saveAddress = async () => {
+        localStorage.removeItem("exploreListXrpl");
+        localStorage.removeItem("searchResults");
         console.log("saving in local")
         localStorage.setItem('wallet', JSON.stringify(walletAddress));
-        toast.success('🦄 "successfully saved address"', {
+        const [decodedData, searchData] = await activateSearch(walletAddress)
+        toast.success('🦄 "successfully saved address. Refresh!!"', {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -32,7 +37,7 @@ function AddressModal({ closeModal }) {
                 <div className="title"></div>
 
                 <div className="body">
-                    <TextInput type="text" placeholder ="Enter r-address" textChange={(e)=>setWalletAddress(e.target.value)}/>
+                    <TextInput type="text" placeholder="Enter r-address" textChange={(e) => setWalletAddress(e.target.value)} text={walletAddress} />
                 </div>
 
                 <div className="footer">

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../services";
 
 import "./Dashboard.css";
 import BurnModal from "./BurnModal";
@@ -33,7 +33,7 @@ export const Dashboard = (props) => {
     const headers = { body: JSON.stringify(body) };
     console.log("headers", headers);
 
-    axios
+    api
       .post("/api/getTokensFromLedger", { metadata: body })
       .then((res) => {
         console.log(res);

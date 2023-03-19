@@ -1,9 +1,7 @@
 .addressBackground{
     border-radius: 20px;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    right: 3px;
 }
 
 .addressContainer{
@@ -55,7 +53,7 @@
 }
 
 .addressContainer .footer button { 
-    width: 150px;
+    min-width: 125px;
     height: 45px;
     margin: 10px;
     border: none;

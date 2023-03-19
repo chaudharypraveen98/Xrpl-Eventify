@@ -2,10 +2,9 @@
   "name": "eventify-frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://127.0.0.1:5000",
   "author": "Praveen Chaudhary",
   "description": "Customizable event pages, Ticketing and Registration services, Payment processing, analytics and Reporting, and more",
-  "homepage": "https://chaudharypraveen98.github.io/Xrpl-Eventify/tree/master/Frontend",
+  "homepage": "https://chaudharypraveen98.github.io/Xrpl-Eventify/",
   "dependencies": {
     "@babel/core": "7.20.12",
     "@google/model-viewer": "^1.10.1",

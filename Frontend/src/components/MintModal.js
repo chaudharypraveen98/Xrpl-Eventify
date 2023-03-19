@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
 //import * as fs from 'fs';
+import api from "../services";
 
 import MintModalInput from "./MintModalInput";
 import QrModal2 from "./QrModal2";
@@ -19,7 +19,7 @@ function MintModal({ closeModal }) {
     const [data, setData] = useState(null);
 
     function activateMinting() {
-        if (date == "" || location == "" || description == "" || file == null) {
+        if (date === "" || location === "" || description === "" || file === null) {
             setMessage("Please fill out the entire form");
         }
         let fileReader = new FileReader();
@@ -40,7 +40,7 @@ function MintModal({ closeModal }) {
             var bodyFormData = new FormData();
             bodyFormData.append('metadata', metadata);
             bodyFormData.append('file', evt?.target?.result);
-            axios({
+            api({
                 method: "post",
                 url: "/api/xummMintV1",
                 data: bodyFormData,
@@ -50,7 +50,7 @@ function MintModal({ closeModal }) {
                 console.log(res);
                 setData({ xummData: res });
             });
-            // axios.post("/api/xummMintV1", body).then((res) => {
+            // api.post("/api/xummMintV1", body).then((res) => {
             //     console.log("xumm data coming");
             //     console.log(res);
 

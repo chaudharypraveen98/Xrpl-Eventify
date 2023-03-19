@@ -1,13 +1,63 @@
 # Xrpl-Eventify
 
-Xrpl-Eventify is a MERN stack application that contains functionality to allow event organizers to mint and distribute Attendance NFTs on the XRP Ledger. The core parts of this application consist of a React frontend, Express backend, **Rest API (nftRoutes.js)**, and **XrplNFTHelper.js**. Please note, mongo has been disconnected. Any db solution can replace it but isn't needed at this point. All metadata storage for the NFT's is currently stored locally is JSON object files. In a live version these files will need to be stored in a location with a public URI. 
+Xrpl-Eventify is a MERN stack application that contains functionality to allow event organizers to mint and distribute Attendance NFTs on the XRP Ledger. The core parts of this application consist of a React frontend, Express backend, **Rest API (nftRoutes.js)**, and **XrplNFTHelper.js**. 
 
-In order to facilitate storing json files with a public uri and continue using the site without the need for a db solution  **XummApi.js** has was introduced. It consists of 11 REST API endpoints and will allow the developer to build on top a marketplace for NFT owners and minters to trade and sell their NFTs utilizing the XUMM Wallet and Pinata IPFS solution. 
+<img src="./readme_assets/homepage.png" alt="homepage image">
+
+We have used local storage for storing data. we had mongo functions to interact whenever we want to change local storage to mongo.
+
+**XummApi.js**  consists of 11 REST API endpoints and will allow the developer to build on top a marketplace for NFT owners and minters to trade and sell their NFTs utilizing the XUMM Wallet and Pinata IPFS solution. 
+
+## Features implemented :
+1. View the latest events.
+2. Minting/Creating the events.
+3. Cancelling/Burning the events.
+
+### 1. View the latest events.
+<img src="./readme_assets/your created events.png" alt="your latest events">
+
+It fetches the nfts of the user from the blockchain/on chain then from the metadata it gets the **hexadecimal encoded Nft URI** then converts back to human readable uri(which is a ipfs hosted file link) from the **Pinata** IPFS.
+
+### 2. Minting/Creating the events.
+<img src="./readme_assets/creation%20contine.png" alt="your latest events">
+Creating events are so easy with Xumm wallet. Once you filled the details, the Qr is shown up.
 
 
-# Install and use the developer example
+**Just scan and mint easily**
+<img src="./readme_assets/creation%20payment.png" alt="creation payment">
 
-1) Install all packages. Do three npm installs in all three directories. 
+Once you created the event, you can easily view in explore page
+
+### 3. Cancelling/Burning the events.
+Click on Cancel/ Delete event option.
+<img src="./readme_assets/burn%20nft.png" alt="burn nft">
+
+Scan , pay and hurray your event has been deleted.
+
+## Future Plans
+1. To store the meta data in json on ipfs or mongo database.
+2. Proof of attendance if the user has joined the event or not.
+3. Task like twitter like, retweets, and join socials to be incorporated ine the future.
+
+## Lets talk about the architecture
+**1. Updating address**  
+ <center><img src="./readme_assets/architecture-design/Eventify-address.png" height="300"></center>
+
+ **2. Explore Page**  
+ <center><img src="./readme_assets/architecture-design/Eventify-explore.png" height="300"></center>
+
+  **3. Mint NFT**  
+ <center><img src="./readme_assets/architecture-design/Eventify-mint.png" height="300"></center>
+
+   **4. Burn NFT**  
+ <center><img src="./readme_assets/architecture-design/Eventify-burn.png" height="300"></center>
+
+## Complete Architecture
+<center><img src="./readme_assets/architecture-design/Eventify.png" height="300"></center>  
+
+## Install and use the developer example
+
+1. Install all packages. Do three npm installs in all three directories. 
 ```
 Xrpl-Eventify/Xrpl-Eventify/ npm install
 Xrpl-Eventify/Xrpl-Eventify/backend/ npm install
@@ -15,7 +65,7 @@ Xrpl-Eventify/Xrpl-Eventify/frontend npm install
 
 ```
 
-2) Run backend then frontend. 
+2. Run backend then frontend. 
 
 ```
 ../backend/npm start

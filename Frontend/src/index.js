@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom';
 import { About } from "./components/About";
 import { Dashboard } from "./components/Dashboard";
 import Home from "./pages/Home";
@@ -18,7 +18,8 @@ import NFTDetail from "./pages/NFTDetail";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-  <BrowserRouter>
+  // <BrowserRouter>
+  <HashRouter>
     <Routes>
       <Route path="/" element={<DAppProvider config={{}}><Home /></DAppProvider>} />
       <Route path="/create" element={<DAppProvider><Create /></DAppProvider>} />
@@ -37,7 +38,8 @@ root.render(
       pauseOnHover
       theme="light" 
       />
-  </BrowserRouter>
+  </HashRouter>
+  // </BrowserRouter>
   //</React.StrictMode>
 );
 

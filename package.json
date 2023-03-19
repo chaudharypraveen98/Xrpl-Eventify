@@ -4,7 +4,7 @@
   "description": "Customizable event pages, Ticketing and Registration services, Payment processing, analytics and Reporting, and more",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server",
+    "start": "nodemon server.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm start\" \"npm run client\""
   },
@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^1.3.4",
     "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",

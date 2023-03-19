@@ -23,7 +23,7 @@ const CardList = ({ list, type = "horizontal" }) => {
   return (
     <div
       id="card-list"
-      style={{ flexDirection: type == "horizontal" ? "row" : "column" }}
+      style={{ flexDirection: type === "horizontal" ? "row" : "column" }}
     >
       <Carousel
         ref={carouselRef}

@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React, { Component } from 'react';
 import QrModal from './QrModal';
+import api from "../services";
 
 
 export default class Home extends Component {
@@ -55,7 +55,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
 
   
-    let response = await axios.get('/api/createTickets', {headers}).then( (data) => { 
+    let response = await api.get('/api/createTickets', { headers }).then((data) => { 
 
       console.log(data)
       this.setState({xummData: data});
@@ -77,7 +77,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
 
   
-    let response = await axios.get('/api/mintTickets', {headers}).then( (data) => { 
+    let response = await api.get('/api/mintTickets', { headers }).then((data) => { 
 
       console.log(data)
       this.setState({xummData: data});
@@ -99,7 +99,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
 
   
-    let response = await axios.get('/api/account_info', {headers}).then( (data) => { 
+    let response = await api.get('/api/account_info', { headers }).then((data) => { 
 
       console.log(data)
       this.setState({xummData: data});
@@ -121,7 +121,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
 
   
-    let response = await axios.get('/api/ticket_info', {headers}).then( (data) => { 
+    let response = await api.get('/api/ticket_info', { headers }).then((data) => { 
 
       console.log(data)
       this.setState({xummData: data});
@@ -143,7 +143,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
 
   
-    let response = await axios.get('/api/xummAcceptOffer', {headers}).then( (data) => { 
+    let response = await api.get('/api/xummAcceptOffer', { headers }).then((data) => { 
 
       console.log(data)
       this.setState({xummData: data});
@@ -168,7 +168,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
 
   
-    let response = await axios.get('/api/xummCreateBuyOffer', {headers}).then( (data) => { 
+    let response = await api.get('/api/xummCreateBuyOffer', { headers }).then((data) => { 
 
       console.log(data)
       this.setState({xummData: data});
@@ -190,7 +190,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
 
   
-    let response = await axios.get('/api/xummCancelOffer', {headers}).then( (data) => { 
+    let response = await api.get('/api/xummCancelOffer', { headers }).then((data) => { 
 
       console.log(data)
       this.setState({xummData: data});
@@ -213,7 +213,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
 
   
-    let response = await axios.get('/api/xummCreateSellOffer', {headers}).then( (data) => { 
+    let response = await api.get('/api/xummCreateSellOffer', { headers }).then((data) => { 
 
       console.log(data)
       this.setState({xummData: data});
@@ -237,7 +237,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
 
   
-    let response = await axios.get('/api/xummMint', {headers}).then( (data) => { 
+    let response = await api.get('/api/xummMint', { headers }).then((data) => { 
       
       this.setState({xummData: data});
 
@@ -255,7 +255,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
 
 
-    let response = await axios.get('/api/xummBurn', {headers}).then( (data) => { 
+    let response = await api.get('/api/xummBurn', { headers }).then((data) => { 
      
       this.setState({xummData: data})
       
@@ -281,7 +281,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
     
 
-    let response = await axios.get('/api/getPayloadInfo', {headers}).then( (data) => { 
+    let response = await api.get('/api/getPayloadInfo', { headers }).then((data) => { 
       
       console.log(data)
       
@@ -309,7 +309,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
     
 
-    let response = await axios.get('/api/getTokensFromLedger', {headers}).then( (data) => { 
+    let response = await api.get('/api/getTokensFromLedger', { headers }).then((data) => { 
       
       console.log(data)
       
@@ -325,7 +325,7 @@ export default class Home extends Component {
     const headers = {'body': JSON.stringify(body)}
     
 
-    let response = await axios.get('/api/test', {headers}).then( (data) => { 
+    let response = await api.get('/api/test', { headers }).then((data) => { 
       
       console.log(data)
       

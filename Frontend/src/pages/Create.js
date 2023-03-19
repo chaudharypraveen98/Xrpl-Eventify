@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services";
 // import Accordion from "../components/base/Accordion";
 // import AccordionHeader from "../components/base/AccordionHeader";
 // import Button from "../components/base/Button";
@@ -45,7 +45,7 @@ const Create = () => {
     bodyFormData.append('description', description);
     bodyFormData.append('file', file);
     bodyFormData.append('filename', file?.name);
-    axios({
+    api({
       method: "post",
       url: "/api/xummMintV1",
       data: bodyFormData,

@@ -7,20 +7,20 @@ import XummSdk from "xumm-sdk";
 import FormData from "form-data";
 import formidable from "formidable";
 import fs from "fs";
+import dotenv from 'dotenv'
+dotenv.config()
 
-const xummApi = "";
-const xummSecret = "";
+const XUMM_API = process.env.XUMM_API
+const XUMM_SECRET = process.env.XUMM_SECRET;
 
-const pinataApiKey = "";
-const pinataSecretApiKey =
-  "";
+const PINATA_API_KEY = process.env.PINATA_API_KEY;
+const PINATA_SECRET_API_KEY = process.env.PINATA_SECRET_API_KEY;
 
-const tempAddr = "";
+const tempAddr = "rfRZeyG8YfSmKPqdX6PVLFJ5bdPCraDAsA";
 
-const minterAddress = "";
-const minterKey = "";
-
-const sdk = new XummSdk.XummSdk(xummApi, xummSecret);
+const minterAddress = "rQErS3ksic12vcat9HNiPA2Gsdse5i1gb1";
+const MINTER_KEY = process.env.MINTER_KEY;
+const sdk = new XummSdk.XummSdk(XUMM_API, XUMM_SECRET);
 
 const router = express.Router();
 
@@ -35,7 +35,7 @@ router.route("/mintTickets").post((req, res) => {
   });
 
   nftManager.getTicketInfo().then((tickets) => {
-    nftManager.mintTickets(tickets, minterKey).then((nfts) => {
+    nftManager.mintTickets(tickets, MINTER_KEY).then((nfts) => {
       res.send(nfts);
     });
   });
@@ -141,8 +141,8 @@ router.route("/xummMint").post((req, res) => {
     .post(url, req.body, {
       headers: {
         "Content-Type": `application/json; boundary= ${req.body.metadata._boundary}`,
-        pinata_api_key: pinataApiKey,
-        pinata_secret_api_key: pinataSecretApiKey,
+        pinata_api_key: PINATA_API_KEY,
+        PINATA_SECRET_API_KEY: PINATA_SECRET_API_KEY,
       },
     })
     .then(function (ipfsData) {
@@ -234,8 +234,8 @@ router.route("/xummMintV1").post((req, res) => {
           // 'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
           "Content-Type": `multipart/form-data; boundary=${formData?._boundary}`,
           // "Content-Type": `application/json; boundary= ${req.body.metadata._boundary}`,
-          pinata_api_key: pinataApiKey,
-          pinata_secret_api_key: pinataSecretApiKey,
+          pinata_api_key: PINATA_API_KEY,
+          PINATA_SECRET_API_KEY: PINATA_SECRET_API_KEY,
         },
       })
       .then(function (ipfsData) {
@@ -338,8 +338,8 @@ router.route("/getPayloadInfo").get((req, res) => {
     method: "GET",
     headers: {
       accept: "application/json",
-      "X-API-Key": xummApi,
-      "X-API-Secret": xummSecret,
+      "X-API-Key": XUMM_API,
+      "X-API-Secret": XUMM_SECRET,
     },
   };
 

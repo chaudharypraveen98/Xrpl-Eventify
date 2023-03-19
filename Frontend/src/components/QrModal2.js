@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import api from "../services"
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
@@ -20,7 +20,7 @@ function QrModal2({ qr_png, uuid, closeModal }) {
 
         const headers = { body: JSON.stringify(body) };
 
-        await axios.get("/api/getPayloadInfo", { headers }).then((data) => {
+        await api.get("/api/getPayloadInfo", { headers }).then((data) => {
           if (data.data.meta.signed) {
             clearInterval(interval);
             closeModal();

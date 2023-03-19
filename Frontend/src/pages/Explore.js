@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../services";
 import CardList from "../components/CardList";
 import { exploreList } from "../constants/MockupData";
 import "../styles/Explore.css";
@@ -7,6 +7,8 @@ import Header from "../components/Header";
 import Search from "../components/Search";
 import BurnModal from "../components/BurnModal";
 import CustomTable from "../components/base/Table";
+import { activateSearch } from "../services/nftServices";
+import { toast } from "react-toastify";
 const Explore = () => {
   const wallet = JSON.parse(localStorage.getItem("wallet"));
   const [search, setSearch] = useState(wallet);
@@ -47,14 +49,7 @@ const Explore = () => {
       idValue: searchResults.results[nftIndex].NFTokenID,
     });
   }
-  function hex_to_ascii(str1) {
-    var hex = str1.toString();
-    var str = "";
-    for (var n = 0; n < hex.length; n += 2) {
-      str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
-    }
-    return str;
-  }
+
 
   const tableClickHandler = (row = 0, column = 0) => {
     if (column === 0) {
@@ -65,7 +60,7 @@ const Explore = () => {
           account: search,
           nft_id: searchResults.results[row].NFTokenID
         };
-        axios.post("/api/getTokenInfo", { metadata: body }).then((res) => {
+        api.post("/api/getTokenInfo", { metadata: body }).then((res) => {
           console.log("res adta", res.data)
         })
           .then((err) => {
@@ -74,10 +69,28 @@ const Explore = () => {
       }
     }
   };
+  const fetchDataFromService = async () => {
+    const [decodedData, searchData] = await activateSearch(search)
+    console.log("decodedData", decodedData, decodedData?.length < 1)
+    if (decodedData?.length < 1) {
+      toast.error('🦄 No Nft Found', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    setExploreListXrpl(decodedData);
+    setSearchResults(searchData);
+  }
   useEffect(() => {
     if (wallet && search && !importedExploreListXrpl && !importedSearchResults) {
       console.log("why calling")
-      activateSearch();
+      void fetchDataFromService()
     } else {
       console.log("good going")
     }
@@ -87,31 +100,20 @@ const Explore = () => {
     setSearch(wallet);
   }, [wallet]);
 
-  async function activateSearch() {
-    let body = {
-      account: search,
-    };
-    axios.post("/api/getTokensFromLedger", { metadata: body }).then((res) => {
-      let decodedData = [];
-      res?.data?.forEach((nft, index) => {
-        nft.Src = hex_to_ascii(nft?.URI);
-        decodedData.push({
-          name: `Test NFT #${index}`,
-          description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-          src: hex_to_ascii(nft?.URI),
-        });
-      });
-      localStorage.setItem("exploreListXrpl", JSON.stringify(decodedData));
-      localStorage.setItem(
-        "searchResults",
-        JSON.stringify({ results: res?.data, showButtons: true })
-      );
-      setExploreListXrpl(decodedData);
+  window.addEventListener('storage', () => {
+    console.log("Change to local storage!");
+    setSearchResults(importedSearchResults
+      ? importedSearchResults
+      : {
+        results: [],
+        showButtons: false,
+      })
+    setExploreListXrpl(importedExploreListXrpl ? importedExploreListXrpl : [])
+    // ...
+  })
 
-      setSearchResults({ results: res?.data, showButtons: true });
-    });
-  }
+
+
   return (
     <div id="explore">
       <Header />
@@ -128,7 +130,7 @@ const Explore = () => {
 
       <Search
         textChange={(event) => setSearch(event.target.value)}
-        iconClick={activateSearch}
+        iconClick={() => activateSearch(search)}
       />
       <div className="table-title">
         <h3>Your Created Events</h3>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
+import api from "../services";
 
 import "./BurnModal.css";
 
@@ -14,7 +14,7 @@ function BurnModal({ closeModal, idValue }) {
       },
     };
 
-    axios.post("/api/xummBurn", body).then((res) => {
+    api.post("/api/xummBurn", body).then((res) => {
       setBurnData({ qr_img: res.data.refs.qr_png, uuid: res.data.uuid });
     });
   }
@@ -33,7 +33,7 @@ function BurnModal({ closeModal, idValue }) {
 
         const headers = { body: JSON.stringify(body) };
 
-        axios.get("/api/getPayloadInfo", { headers }).then((res) => {
+        api.get("/api/getPayloadInfo", { headers }).then((res) => {
           console.log(timer);
 
           if (res.data.meta.signed) {
@@ -49,8 +49,8 @@ function BurnModal({ closeModal, idValue }) {
 
   return (
     <div className="modalBurnBackground">
-      {burnData.qr_img == "" ? xummBurn() : ""}
-      {burnData.uuid == "" ? "" : checkStatus()}
+      {burnData.qr_img === "" ? xummBurn() : ""}
+      {burnData.uuid === "" ? "" : checkStatus()}
 
       <div className="modalBurnContainer">
         <div className="titleCloseBtn">

@@ -33,7 +33,7 @@ const CustomTable = ({ items, tableHeads, tableClickHandler }) => {
                     </td>
                   );
                 }
-                // else if (columnIndex === 1) {
+                // else if (columnIndex ==== 1) {
                 //   return <td
                 //     className="text-left"
                 //     key={`data-${rowIndex}-${columnIndex}`}

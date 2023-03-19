@@ -61,9 +61,9 @@ export class XrplNFTHelper {
     }
   }
 
-  async mintTickets(tickets, minterKey) {
+  async mintTickets(tickets, MINTER_KEY) {
     const client = new xrpl.Client("wss://xrplcluster.com/:51233");
-    const wallet = xrpl.Wallet.fromSeed(minterKey);
+    const wallet = xrpl.Wallet.fromSeed(MINTER_KEY);
 
     await client.connect();
 
