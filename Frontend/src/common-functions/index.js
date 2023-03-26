@@ -5,5 +5,14 @@ const hex_to_ascii = (str1) => {
         str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
     }
     return str;
-}
-export { hex_to_ascii };
+};
+const mimeTypeMapping = {
+    jpeg: "image/jpeg",
+    jpg: "image/jpeg",
+    png: "image/png",
+    apng: "image/apng",
+    avif: "image/avif",
+    webp: "image/webp",
+    svg: "image/svg+xml",
+};
+export { hex_to_ascii, mimeTypeMapping };

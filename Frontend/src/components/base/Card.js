@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import "../../styles/base/Card.css";
 
-const Card = React.forwardRef(
-  (
-    {
-      width = "250px",
-      height = "300px",
+const Card = React.forwardRef(({
+  width,
+  height,
       child,
       blurColor = "rgba(48,118,234,0.2)",
       onClick,
@@ -15,8 +13,8 @@ const Card = React.forwardRef(
     <div
       className="card"
       style={{
-        width: `${width}`,
-        height: `${height}`,
+        width: `${width ? width : "270px"}`,
+        height: `${height ? height : "auto"}`,
         background: `radial-gradient(
                 circle,
                 rgba(255, 255, 255, 0.05) 0%,

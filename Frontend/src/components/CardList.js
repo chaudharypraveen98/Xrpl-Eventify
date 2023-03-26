@@ -25,6 +25,7 @@ const CardList = ({ list, type = "horizontal" }) => {
       id="card-list"
       style={{ flexDirection: type === "horizontal" ? "row" : "column" }}
     >
+      {list?.length > 0 &&
       <Carousel
         ref={carouselRef}
         enableAutoPlay={true}
@@ -38,16 +39,17 @@ const CardList = ({ list, type = "horizontal" }) => {
           // }, 4000); // same time
         }}
       >
-        {list.map((item, index) => (
+          {list?.map((item, index) => (
           <NFTCard
             nftSrc={item.src}
-            nftName={`Xrpl Lanuch Party ${index+1}`}
+            nftName={item.name}
             price={randomIntFromInterval(1, 9)}
             key={index}
-            onClick={() => navigate("/detail", { state: { item: item } })}
+            onClick={() => navigate(`/detail/${index}`, { state: { item: item } })}
           />
         ))}
       </Carousel>
+      }
     </div>
   );
 };

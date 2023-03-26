@@ -49,7 +49,7 @@ const Header = () => {
         <Link to='/' id='logo'>Eventify</Link>
 
         <div id="link-containers">
-          <Link to='/create'>Create Event</Link>
+          <Link to='/create'>Manage Event</Link>
           <Link to='/explore'>Explore</Link>
           <button id="connect-wallet" onClick={()=>setOpenAddressModal(!openAddressModal)} >{!wallet ? 'Enter Wallet' : wallet}</button>
           {openAddressModal &&

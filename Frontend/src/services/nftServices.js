@@ -1,6 +1,30 @@
 import React from 'react';
 import api from '../services';
-import { hex_to_ascii } from '../common-functions';
+import { hex_to_ascii, mimeTypeMapping } from '../common-functions';
+import axios from 'axios';
+
+const getNftMetaData = async (nfts) => {
+    console.log("nfts", nfts)
+    const fetchedData = []
+    nfts?.forEach(async (nft) => {
+        const nftUrl = hex_to_ascii(nft?.URI)
+        const { data: metaData } = await axios.get(nftUrl);
+        const imageExt = metaData?.name?.split(".")[1]
+        const contentType = imageExt in mimeTypeMapping ? mimeTypeMapping[imageExt] : "image/png";
+        console.log("metaData", metaData)
+        fetchedData.push({
+            name: metaData?.name,
+            description: metaData?.description,
+            src: `data:${contentType};base64,${metaData?.file}`,
+            eventLink: metaData?.eventLink,
+            date: metaData?.date
+        })
+        localStorage.setItem("exploreListXrpl", JSON.stringify(fetchedData));
+    })
+    console.log("fetchedData2", fetchedData)
+    // localStorage.setItem("exploreListXrpl", JSON.stringify(fetchedData));
+
+}
 
 const activateSearch = async (accountAddress) => {
     let body = {
@@ -8,32 +32,22 @@ const activateSearch = async (accountAddress) => {
     };
     try {
         const res = await api.post("/api/getTokensFromLedger", { metadata: body });
-        let decodedData = [];
-        console.log("res", res)
+        console.log("fetched from ledger", res)
         if (res?.data) {
-            res?.data?.forEach((nft, index) => {
-                nft.Src = hex_to_ascii(nft?.URI);
-                decodedData.push({
-                    name: `Test NFT #${index}`,
-                    description:
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                    src: hex_to_ascii(nft?.URI),
-                });
-            });
             // https://ipfs.io/ipfs/cid
-            localStorage.setItem("exploreListXrpl", JSON.stringify(decodedData));
             localStorage.setItem(
                 "searchResults",
                 JSON.stringify({ results: res?.data, showButtons: true })
             );
-            return [decodedData, { results: res?.data, showButtons: true }]
+
+            return res?.data
         } else {
-            return [[], { results: [], showButtons: true }]
+            return []
         }
     } catch (error) {
         console.log("error", error);
-        return [[], { results: [], showButtons: true }]
+        return []
     }
 }
 
-export { activateSearch };
+export { activateSearch, getNftMetaData };

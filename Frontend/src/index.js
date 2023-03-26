@@ -24,7 +24,7 @@ root.render(
       <Route path="/" element={<DAppProvider config={{}}><Home /></DAppProvider>} />
       <Route path="/create" element={<DAppProvider><Create /></DAppProvider>} />
       <Route path="/explore" element={<DAppProvider config={{}}><Explore /></DAppProvider>} />
-      <Route path="/detail" element={<DAppProvider config={{}}><NFTDetail /></DAppProvider>} />
+      <Route path="/detail/:id" element={<DAppProvider config={{}}><NFTDetail /></DAppProvider>} />
       <Route path="/About" element={<About />} />
     </Routes>
     <ToastContainer position="bottom-right"

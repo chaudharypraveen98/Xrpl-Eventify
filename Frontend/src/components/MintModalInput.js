@@ -8,19 +8,26 @@ function MintModalInput({
   setFile,
   file,
   message,
+  setEventName
 }) {
   return (
     <>
-      <p>CREATE A EVENT</p>
-      <br />
+      <div>
+        <label>Event Name</label>
+        <TextInput
+          type="text"
+          placeholder="Event Name"
+          maxLength={50}
+          textChange={(e) => setEventName(e.target.value)}
+        />
+      </div>
+
       <div>
         <label>Date</label>
         <TextInput
           type="Date"
           placeholder="Description"
           textChange={(e) => setDate(e.target.value)}
-          height="auto"
-          width="80%"
         />
       </div>
 
@@ -29,9 +36,8 @@ function MintModalInput({
         <TextInput
           type="text"
           placeholder="Live Stream Url"
+          maxLength={50}
           textChange={(e) => setLocation(e.target.value)}
-          height="auto"
-          width="80%"
         />
       </div>
 
@@ -40,9 +46,8 @@ function MintModalInput({
         <TextInput
           type="text"
           placeholder="Description"
+          maxLength={100}
           textChange={(e) => setDescription(e.target.value)}
-          height="auto"
-          width="80%"
         />
       </div>
 
@@ -76,6 +81,7 @@ function MintModalInput({
         <img
           style={{ height: "100px", width: "100px" }}
           src={URL.createObjectURL(file)}
+          alt="uploaded file"
         />
       )}
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Hero from "../components/Hero";
 import "../styles/Home.css";
 import CardList from "../components/CardList";

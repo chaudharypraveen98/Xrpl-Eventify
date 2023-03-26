@@ -8,26 +8,21 @@ import FormData from "form-data";
 import formidable from "formidable";
 import fs from "fs";
 import dotenv from 'dotenv'
+import { xummCall } from "./XummCall.js";
 dotenv.config()
-
-const XUMM_API = process.env.XUMM_API
-const XUMM_SECRET = process.env.XUMM_SECRET;
 
 const PINATA_API_KEY = process.env.PINATA_API_KEY;
 const PINATA_SECRET_API_KEY = process.env.PINATA_SECRET_API_KEY;
+const XUMM_API = process.env.XUMM_API
+const XUMM_SECRET = process.env.XUMM_SECRET;
 
 const tempAddr = "rfRZeyG8YfSmKPqdX6PVLFJ5bdPCraDAsA";
 
 const minterAddress = "rQErS3ksic12vcat9HNiPA2Gsdse5i1gb1";
 const MINTER_KEY = process.env.MINTER_KEY;
-const sdk = new XummSdk.XummSdk(XUMM_API, XUMM_SECRET);
 
 const router = express.Router();
 
-const xummCall = async (payload) => {
-  const data = await sdk.payload.create(payload);
-  return data;
-};
 
 router.route("/mintTickets").post((req, res) => {
   const nftManager = new XrplNFTHelper({
@@ -41,21 +36,34 @@ router.route("/mintTickets").post((req, res) => {
   });
 });
 
+// It will create sequence in the ledger to be filled in a required manner
 router.route("/createTickets").post((req, res) => {
-  let payload = {
-    TransactionType: "TicketCreate",
-    TicketCount: req.body.metadata.TicketCount,
-  };
+  const nftManager = new XrplNFTHelper({
+    Account: req.body.metadata.account,
+  });
 
-  try {
-    xummCall(payload).then((xummInfo) => {
-      let response = JSON.stringify(xummInfo);
+  nftManager.acctInfo().then((info) => {
+    const my_sequence = info?.result?.account_data.Sequence;
+    let payload = {
+      TransactionType: "TicketCreate",
+      TicketCount: parseInt(req.body.metadata.TicketCount),
+      Account: req.body.metadata.account,
+      Sequence: my_sequence,
+    };
+    console.log("payload", payload)
+    try {
+      xummCall(payload).then((xummInfo) => {
+        let response = JSON.stringify(xummInfo);
+        console.log("create tickets", response, xummInfo)
 
-      res.send(response);
-    });
-  } catch (error) {
-    console.log(error);
-  }
+        res.send(response);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  })
+
+
 });
 
 router.route("/xummCancelOffer").post((req, res) => {
@@ -151,7 +159,7 @@ router.route("/xummMint").post((req, res) => {
         URI: xrpl.convertStringToHex(
           `https://gateway.pinata.cloud/ipfs/${ipfsData.data.IpfsHash}`
         ),
-        Flags: parseInt(11),
+        Flags: 8,
         NFTokenTaxon: 1111,
         Memos: [
           {
@@ -244,7 +252,100 @@ router.route("/xummMintV1").post((req, res) => {
           URI: xrpl.convertStringToHex(
             `https://gateway.pinata.cloud/ipfs/${ipfsData.data.IpfsHash}`
           ),
-          Flags: parseInt(11),
+          Flags: 8,
+          NFTokenTaxon: 1111,
+          Memos: MemoDataNft,
+        };
+
+        try {
+          xummCall(payload).then((xummInfo) => {
+            let response = JSON.stringify(xummInfo);
+
+            res.end(response);
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
+});
+router.route("/xummMintV2").post((req, res) => {
+  const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
+  const form = formidable({ multiples: true });
+  form.parse(req, (err, fields, files) => {
+    console.log("fields: ", fields);
+    console.log("files: ", files);
+    const formData = new FormData();
+    const MemoDataNft = [
+      {
+        "Memo": {
+          MemoType: xrpl.convertStringToHex("name"),
+          MemoData: xrpl.convertStringToHex(fields?.name),
+        }
+      }
+      ,
+      {
+        "Memo": {
+          MemoType: xrpl.convertStringToHex("date"),
+          MemoData: xrpl.convertStringToHex(fields?.date),
+        }
+      },
+      {
+        "Memo": {
+          MemoType: xrpl.convertStringToHex("description"),
+          MemoData: xrpl.convertStringToHex(fields?.description),
+        }
+      },
+      {
+        "Memo": {
+          MemoType: xrpl.convertStringToHex("location"),
+          MemoData: xrpl.convertStringToHex(fields?.location),
+        }
+      }
+    ]
+    const file_buffer = fs.readFileSync(files?.file?.filepath);
+    //encode contents into base64
+    const contents_in_base64 = file_buffer.toString('base64');
+    var data = JSON.stringify({
+      pinataOptions: {
+        cidVersion: 1,
+      },
+      pinataMetadata: {
+        name: fields?.name,
+        keyvalues: {
+          date: fields?.date,
+        },
+      },
+      pinataContent: {
+        file: contents_in_base64,
+        eventLink: fields?.location,
+        description: fields?.description,
+        date: fields?.date,
+        name: fields?.name,
+      }
+    })
+    console.log(data)
+
+    axios
+      .post(url, data, {
+        headers: {
+          // 'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+          'Content-Type': 'application/json',
+          // "Content-Type": `application/json; boundary= ${req.body.metadata._boundary}`,
+          pinata_api_key: PINATA_API_KEY,
+          PINATA_SECRET_API_KEY: PINATA_SECRET_API_KEY,
+        },
+      })
+      .then(function (ipfsData) {
+        let payload = {
+          TransactionType: "NFTokenMint",
+          URI: xrpl.convertStringToHex(
+            `https://gateway.pinata.cloud/ipfs/${ipfsData.data.IpfsHash}`
+          ),
+          Flags: 8,
           NFTokenTaxon: 1111,
           Memos: MemoDataNft,
         };
@@ -363,9 +464,10 @@ router.route("/ticket_info").post((req, res) => {
   const nftManager = new XrplNFTHelper({
     Account: req.body.metadata.account,
   });
+  console.log("nftManager", nftManager)
   nftManager.getTicketInfo().then((info) => {
     let response = JSON.stringify(info);
-
+    console.log("response", response)
     res.send(response);
   });
 });

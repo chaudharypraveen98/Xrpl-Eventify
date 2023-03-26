@@ -1,3 +1,9 @@
+.detail-page-container{
+    min-height: 100vh;
+}
+.detail-page-container #nft-video{
+    margin: 30px 0;
+}
 #nft-detail-card-wrapper{
     width:100%;
     height:100%;
@@ -7,8 +13,14 @@
     justify-content:center;
     padding-top:50px;
 }
-
 #detail-content{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
+
+#detail-content>.detail-content-main{
     width:100%;
     height:100%;
     /* border:1px solid red; */
@@ -17,17 +29,17 @@
 }
 
 #detail-image{
-    width:60%;
-    height:100%;
+    width:40%;
     object-fit:cover;
     border-radius:30px;
+    padding: 20px;
 }
 model-viewer#arDetail{
     width:60%;
     height:100%;
 }
 #detail-info{
-    width:40%;
+    width:60%;
     height:100%;
     /* border:1px solid green; */
     display: flex;
@@ -84,6 +96,7 @@ p#description{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 #button-child{
@@ -100,6 +113,7 @@ p#description{
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     font-size:18px;
     font-weight: 600;
+    margin-left: 5px;
 }
 
 .like-container > p.like-count{
@@ -107,6 +121,7 @@ p#description{
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     font-size:20px;
     font-weight: 600;
+    margin: 0!important;
 }
 
 .like-container{
@@ -172,13 +187,12 @@ p#description{
         width:100%;
         height:350px !important;
     }
-    #detail-content{
+    #detail-content>.detail-content-main{
         width:100%;
         height:100%;
         /* border:1px solid red; */
         display:flex;
         flex-direction:column;
-        padding-bottom: 20px;
     }
     p#collection {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,

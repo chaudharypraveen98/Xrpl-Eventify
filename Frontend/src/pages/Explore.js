@@ -7,8 +7,10 @@ import Header from "../components/Header";
 import Search from "../components/Search";
 import BurnModal from "../components/BurnModal";
 import CustomTable from "../components/base/Table";
-import { activateSearch } from "../services/nftServices";
+import { activateSearch, getNftMetaData } from "../services/nftServices";
 import { toast } from "react-toastify";
+import { Colors } from "../constants/Colors";
+import Button from "../components/base/Button";
 const Explore = () => {
   const wallet = JSON.parse(localStorage.getItem("wallet"));
   const [search, setSearch] = useState(wallet);
@@ -16,7 +18,6 @@ const Explore = () => {
     "Cancel - Delete",
     // "Sell Order",
     "NFTokenID",
-    "Src",
     "Issuer",
     "NFTokenTaxon",
   ];
@@ -63,16 +64,25 @@ const Explore = () => {
         api.post("/api/getTokenInfo", { metadata: body }).then((res) => {
           console.log("res adta", res.data)
         })
-          .then((err) => {
+          .catch((err) => {
             console.log("yoken error", err)
           })
       }
     }
   };
   const fetchDataFromService = async () => {
-    const [decodedData, searchData] = await activateSearch(search)
-    console.log("decodedData", decodedData, decodedData?.length < 1)
-    if (decodedData?.length < 1) {
+    toast.info('🦄 Connecting to Ledger....', {
+      position: "bottom-right"
+    });
+    const searchedData = await activateSearch(search)
+    toast.info('🦄 "Fetched Nfts from ledger. Getting metadata from IPFS.."', {
+      position: "bottom-right"
+    });
+    await getNftMetaData(searchedData);
+    toast.success('🦄 "Success"', {
+      position: "bottom-right"
+    });
+    if (searchedData?.length < 1) {
       toast.error('🦄 No Nft Found', {
         position: "bottom-right",
         autoClose: 5000,
@@ -84,8 +94,6 @@ const Explore = () => {
         theme: "light",
       });
     }
-    setExploreListXrpl(decodedData);
-    setSearchResults(searchData);
   }
   useEffect(() => {
     if (wallet && search && !importedExploreListXrpl && !importedSearchResults) {
@@ -100,19 +108,10 @@ const Explore = () => {
     setSearch(wallet);
   }, [wallet]);
 
-  window.addEventListener('storage', () => {
-    console.log("Change to local storage!");
-    setSearchResults(importedSearchResults
-      ? importedSearchResults
-      : {
-        results: [],
-        showButtons: false,
-      })
-    setExploreListXrpl(importedExploreListXrpl ? importedExploreListXrpl : [])
-    // ...
-  })
-
-
+  const clearStorage = () => {
+    localStorage.removeItem("exploreListXrpl");
+    localStorage.removeItem("searchResults");
+  }
 
   return (
     <div id="explore">
@@ -132,6 +131,23 @@ const Explore = () => {
         textChange={(event) => setSearch(event.target.value)}
         iconClick={() => activateSearch(search)}
       />
+      <div style={{ textAlign: 'center', width: "100%", marginTop: 10 }}>
+        <Button
+          width="150px"
+          height="30px"
+          textContent="Fetch Latest Nfts"
+          color={Colors.buttons.secondary}
+          onClick={() => fetchDataFromService()}
+        />
+        <Button
+          width="150px"
+          height="30px"
+          textContent="View Latest/Refresh"
+          color={Colors.buttons.secondary}
+          onClick={() => window.location.reload()}
+        />
+      </div>
+
       <div className="table-title">
         <h3>Your Created Events</h3>
       </div>
@@ -141,7 +157,7 @@ const Explore = () => {
       <div className="table-title">
         <h3>MANAGE Events</h3>
       </div>
-      {searchResults.results.length > 0 ? (
+      {searchResults?.results?.length > 0 ? (
         <div className="result-table-nft-container">
           <div className="result-table-nft">
             <CustomTable

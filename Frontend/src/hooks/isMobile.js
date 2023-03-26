@@ -23,9 +23,13 @@ export const useMobile = () => {
     handleResize();
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize");
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => windowDim.width < 1200 ? setIsMobile(true) : setIsMobile(false), [windowDim]);
+  useEffect(() =>
+    windowDim.width < 700
+      ? setIsMobile(true)
+      : setIsMobile(false)
+    , [windowDim]);
   return isMobile;
 };

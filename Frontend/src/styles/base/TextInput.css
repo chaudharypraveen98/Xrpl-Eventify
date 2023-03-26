@@ -22,7 +22,7 @@
   animation-delay: 0.5s;
 }
 
-#search {
+#search,.inputBox {
   width: 80%;
   height: 100%;
   border: none;
@@ -36,7 +36,7 @@
   border-radius: 30px;
 }
 
-#search:focus {
+#search:focus,.inputBox:focus {
   outline: none;
 }
 

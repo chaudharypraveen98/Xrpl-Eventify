@@ -1,4 +1,4 @@
-.modalMintBackground {
+.createContainerBackground {
     width: 100%;
     height: calc(100vh - 60px);
     display: flex;
@@ -14,6 +14,10 @@
     display: flex;
     flex-direction: column;
     padding: 25px;
+    min-width: 40vw;
+    min-height: 60vh;
+    max-width: 80vw;
+    max-height: 70vh;
 }
 
 .modalMintContainer .title {
@@ -41,9 +45,9 @@
     flex: 50%;
     display: flex;
     align-items: center;
-    font-size: 1.7rem;
     justify-content: flex-start;
     align-items: flex-start;
+    overflow-y: scroll;
 }
 .modalMintContainer .modal-body>div{
     display: flex;
@@ -53,7 +57,21 @@
     margin: 10px 0;
     align-items: center;
 }
-
+.modalMintContainer .modal-body .manage-tab-container{
+    flex: 1;
+    border-radius: 24px;
+    max-height: 80px;
+}
+.manage-tab-container .tab-element{
+    cursor: pointer;
+}
+.manage-tab-container .tab-element>p{
+    font-size: 18px;
+    margin: 10px 0;
+}
+.manage-tab-container .activ-tab{
+    border-bottom: black 2px solid;
+}
 .modalMintContainer .footer {
     flex: 20%;
     display: flex;
