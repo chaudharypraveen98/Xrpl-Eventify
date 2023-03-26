@@ -72,6 +72,10 @@ Xrpl-Eventify/Xrpl-Eventify/frontend npm install
 ../frontend/npm start
 
 ```
+3. Deploying node on prod
+```
+now --prod
+```
 
 # XrpNFTHelper.js
 **XrplNFTHelper.js** is Javascript class that is meant to be used within any NodeJS project. It contains functionality that allows event organizers to mint and distribute Attendance NFTs on the XRP Ledger. It is meant to be imported and instantiated inside the routes file of your project.
